@@ -18,6 +18,7 @@ function App() {
   const [completedTodos, setCompletedTodos] = useState([]);
 
   useEffect(() => {
+    //initialize the todo state with sample starter data
     const fetchTodos = () => {
       setTodos(data);
     };
@@ -25,14 +26,19 @@ function App() {
   }, []);
 
   const addTodo = (userInput) => {
+    //assign new id for the new todo obj
     let newId = todos.length + 1;
+    //create obj that will become the new todo (intialize with complete status to falses)
     let newTodo = { id: newId, todo: userInput, complete: false };
+    //add the new todo obj to existing todos array by making copy
     const newTodos = [...todos, newTodo];
     setTodos(newTodos);
   };
 
   const toggleComplete = (evt, todo) => {
+    //change the complete status to opposite (false <-> true)
     let updatedTodo = { ...todo, complete: !todo.complete };
+    //update the changed status todo obj to current todos state
     const updatedTodos = todos.map((todo) => {
       if (todo.id === updatedTodo.id) {
         todo = updatedTodo;
@@ -43,14 +49,22 @@ function App() {
   };
 
   const clearCompleted = () => {
+    //save all the todo obj with status completed to false to variable
     let notCompleted = todos.filter((todo) => todo.complete === false);
+
+    //save all the todo obj with status completed to true to variable
     let completed = todos.filter((todo) => todo.complete !== false);
+    //update the id of obj so it will be unique (creating new list)
     completed = completed.map((todo) => (todo = { ...todo, id: uuid() }));
+
+    //save the completedTodos inside completedTodos state (adding on top of what was already included)
     setCompletedTodos([...completedTodos, ...completed]);
+    //update the todos state to only the todo obj that has not completed yet
     setTodos(notCompleted);
   };
 
   const deleteAllTodos = () => {
+    //delete all the active todos
     setTodos([]);
   };
 
