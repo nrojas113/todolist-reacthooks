@@ -1,14 +1,21 @@
 import React from "react";
 import SingleTodo from "./SingleTodo";
 
-function TodoList({ todos }) {
+function TodoList({ todos, toggleComplete }) {
   return (
-    <section>
+    <section id="todolist">
       <ul>
         {todos.map((todo) => {
-          return <SingleTodo todo={todo} key={todo.id} />;
+          return (
+            <SingleTodo
+              key={todo.id}
+              todo={todo}
+              toggleComplete={toggleComplete}
+            />
+          );
         })}
       </ul>
+      <button>Clear Completed</button>
     </section>
   );
 }

@@ -12,6 +12,7 @@ const data = [
 
 function App() {
   const [todos, setTodos] = useState([]);
+  const [input, setInput] = useState("");
 
   useEffect(() => {
     const fetchTodos = () => {
@@ -20,17 +21,30 @@ function App() {
     fetchTodos();
   }, []);
 
-  const addTodo = (newTodo) => {
+  const addTodo = (userInput) => {
+    let newId = todos.length + 1;
+    let newTodo = { id: newId, todo: userInput, complete: false };
     const newTodos = [...todos, newTodo];
+    setTodos(newTodos);
   };
 
-  console.log(todos);
+  const toggleComplete = (evt, todo) => {
+    let updatedTodo = { ...todo, complete: !todo.complete };
+    console.log(updatedTodo);
+    const updatedTodos = todos.map((todo) => {
+      if (todo.id === updatedTodo.id) {
+        todo = updatedTodo;
+      }
+      return todo;
+    });
+    setTodos(updatedTodos);
+  };
 
   return (
     <div>
       <Header />
-      <TodoList todos={todos} />
-      <AddForm />
+      <TodoList todos={todos} toggleComplete={toggleComplete} />
+      <AddForm input={input} setInput={setInput} addTodo={addTodo} />
     </div>
   );
 }
