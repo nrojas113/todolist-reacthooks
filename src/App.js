@@ -33,7 +33,6 @@ function App() {
 
   const toggleComplete = (evt, todo) => {
     let updatedTodo = { ...todo, complete: !todo.complete };
-    console.log(updatedTodo);
     const updatedTodos = todos.map((todo) => {
       if (todo.id === updatedTodo.id) {
         todo = updatedTodo;
@@ -51,15 +50,20 @@ function App() {
     setTodos(notCompleted);
   };
 
+  const deleteAllTodos = () => {
+    setTodos([]);
+  };
+
   return (
     <div>
       <Header />
+      <AddForm input={input} setInput={setInput} addTodo={addTodo} />
       <TodoList
         todos={todos}
         toggleComplete={toggleComplete}
         clearCompleted={clearCompleted}
+        deleteAllTodos={deleteAllTodos}
       />
-      <AddForm input={input} setInput={setInput} addTodo={addTodo} />
       <Completed completedTodos={completedTodos} />
     </div>
   );

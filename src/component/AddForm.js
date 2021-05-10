@@ -10,7 +10,7 @@ function AddForm({ setInput, input, addTodo }) {
     setInput("");
   };
   return (
-    <section>
+    <section id="addform">
       <form onSubmit={handleSubmit}>
         <label>New task</label>
         <input

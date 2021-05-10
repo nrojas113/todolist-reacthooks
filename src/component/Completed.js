@@ -3,7 +3,8 @@ import SingleTodo from "./SingleTodo";
 
 function Completed({ completedTodos }) {
   return (
-    <section>
+    <section id="completedTodos">
+      <h1>Past Completed</h1>
       <ul>
         {completedTodos.map((completedTodo) => (
           <SingleTodo key={completedTodo.id} todo={completedTodo} />
