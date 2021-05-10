@@ -1,7 +1,7 @@
 import React from "react";
 import SingleTodo from "./SingleTodo";
 
-function TodoList({ todos, toggleComplete }) {
+function TodoList({ todos, toggleComplete, clearCompleted }) {
   return (
     <section id="todolist">
       <ul>
@@ -15,7 +15,9 @@ function TodoList({ todos, toggleComplete }) {
           );
         })}
       </ul>
-      <button>Clear Completed</button>
+      <button type="button" onClick={clearCompleted}>
+        Clear Completed
+      </button>
     </section>
   );
 }
